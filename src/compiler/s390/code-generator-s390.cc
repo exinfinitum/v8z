@@ -1283,8 +1283,7 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
     case kCheckedLoadWord64:
 #if V8_TARGET_ARCH_S390X
       // TODO: port for s390
-      UNIMPLEMENTED();
-      ASSEMBLE_CHECKED_LOAD_INTEGER(ld, ldx);
+      ASSEMBLE_CHECKED_LOAD_INTEGER(LoadP);
 #else
       UNREACHABLE();
 #endif
@@ -1307,8 +1306,7 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
     case kCheckedStoreWord64:
 #if V8_TARGET_ARCH_S390X
       // TODO: port for s390
-      UNIMPLEMENTED();
-      ASSEMBLE_CHECKED_STORE_INTEGER(std, stdx);
+      ASSEMBLE_CHECKED_STORE_INTEGER(StoreP);
 #else
       UNREACHABLE();
 #endif
