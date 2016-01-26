@@ -1076,7 +1076,7 @@ void InstructionSelector::VisitBitcastInt64ToFloat64(Node* node) {
 
 
 void InstructionSelector::VisitFloat32Add(Node* node) {
-  VisitRRR(this, kS390_AddDouble, node);
+  VisitRRR(this, kS390_AddFloat, node);
 }
 
 
@@ -1094,7 +1094,7 @@ void InstructionSelector::VisitFloat32Sub(Node* node) {
          g.UseRegister(m.right().node()));
     return;
   }
-  VisitRRR(this, kS390_SubDouble, node);
+  VisitRRR(this, kS390_SubFloat, node);
 }
 
 
@@ -1125,7 +1125,7 @@ void InstructionSelector::VisitFloat64Sub(Node* node) {
 
 
 void InstructionSelector::VisitFloat32Mul(Node* node) {
-  VisitRRR(this, kS390_MulDouble, node);
+  VisitRRR(this, kS390_MulFloat, node);
 }
 
 
@@ -1136,7 +1136,7 @@ void InstructionSelector::VisitFloat64Mul(Node* node) {
 
 
 void InstructionSelector::VisitFloat32Div(Node* node) {
-  VisitRRR(this, kS390_DivDouble, node);
+  VisitRRR(this, kS390_DivFloat, node);
 }
 
 

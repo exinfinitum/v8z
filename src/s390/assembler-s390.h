@@ -1187,13 +1187,17 @@ SS2_FORM(zap);
 
   void cdb(DoubleRegister r1, const MemOperand& opnd);
   void cdbr(DoubleRegister r1, DoubleRegister r2);
+  void aebr(DoubleRegister r1, DoubleRegister r2);
   void adb(DoubleRegister r1, const MemOperand& opnd);
   void adbr(DoubleRegister r1, DoubleRegister r2);
   void lzdr(DoubleRegister r1);
+  void sebr(DoubleRegister r1, DoubleRegister r2);
   void sdb(DoubleRegister r1, const MemOperand& opnd);
   void sdbr(DoubleRegister r1, DoubleRegister r2);
+  void meebr(DoubleRegister r1, DoubleRegister r2);
   void mdb(DoubleRegister r1, const MemOperand& opnd);
   void mdbr(DoubleRegister r1, DoubleRegister r2);
+  void debr(DoubleRegister r1, DoubleRegister r2);
   void ddb(DoubleRegister r1, const MemOperand& opnd);
   void ddbr(DoubleRegister r1, DoubleRegister r2);
   void madbr(DoubleRegister r1, DoubleRegister r2, DoubleRegister r3);

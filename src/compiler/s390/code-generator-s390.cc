@@ -890,6 +890,16 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
     case kS390_AddWithOverflow32:
       ASSEMBLE_ADD_WITH_OVERFLOW32();
       break;
+    case kS390_AddFloat:
+    // Ensure we don't clobber right/InputReg(1)
+    if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {
+        ASSEMBLE_FLOAT_UNOP(aebr);
+    } else {
+        if (!i.OutputDoubleRegister().is(i.InputDoubleRegister(0)))
+          __ ldr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+      __ aebr(i.OutputDoubleRegister(), i.InputDoubleRegister(1));
+    }
+      break;
     case kS390_AddDouble:
     // Ensure we don't clobber right/InputReg(1)
     if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {
@@ -913,6 +923,19 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
       break;
     case kS390_SubWithOverflow32:
       ASSEMBLE_SUB_WITH_OVERFLOW32();
+      break;
+    case kS390_SubFloat:
+    // OutputDoubleReg() = i.InputDoubleRegister(0) - i.InputDoubleRegister(1)
+    if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {
+        __ ldr(kScratchDoubleReg, i.InputDoubleRegister(1));
+        __ ldr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+        __ sebr(i.OutputDoubleRegister(), kScratchDoubleReg);
+      } else {
+        if (!i.OutputDoubleRegister().is(i.InputDoubleRegister(0))) {
+          __ ldr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+          }
+        __ sebr(i.OutputDoubleRegister(), i.InputDoubleRegister(1));
+      }
       break;
     case kS390_SubDouble:
     // OutputDoubleReg() = i.InputDoubleRegister(0) - i.InputDoubleRegister(1)
@@ -943,6 +966,16 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
       __ mlr(r0, i.InputRegister(1));
       __ LoadRR(i.OutputRegister(), r0);
       break;
+    case kS390_MulFloat:
+      // Ensure we don't clobber right
+      if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {
+        ASSEMBLE_FLOAT_UNOP(meebr);
+      } else {
+        if (!i.OutputDoubleRegister().is(i.InputDoubleRegister(0)))
+          __ ldr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+        __ meebr(i.OutputDoubleRegister(), i.InputDoubleRegister(1));
+      }
+      break;
     case kS390_MulDouble:
       // Ensure we don't clobber right
       if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {
@@ -972,6 +1005,18 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
       __ ltr(i.OutputRegister(), r1);  // Copy remainder to output reg
       break;
 
+    case kS390_DivFloat:
+      // InputDoubleRegister(1)=InputDoubleRegister(0)/InputDoubleRegister(1)
+      if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {
+      __ ldr(kScratchDoubleReg, i.InputDoubleRegister(1));
+      __ ldr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+      __ debr(i.OutputDoubleRegister(), kScratchDoubleReg);
+      } else {
+      if (!i.OutputDoubleRegister().is(i.InputDoubleRegister(0)))
+      __ ldr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+      __ debr(i.OutputDoubleRegister(), i.InputDoubleRegister(1));
+}
+      break;
     case kS390_DivDouble:
       // InputDoubleRegister(1)=InputDoubleRegister(0)/InputDoubleRegister(1)
       if (i.OutputDoubleRegister().is(i.InputDoubleRegister(1))) {

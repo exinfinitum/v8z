@@ -3001,6 +3001,14 @@ void Assembler::lzdr(DoubleRegister r1) {
 }
 
 
+// Add Register-Register (LB)
+void Assembler::aebr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(AEBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
 // Add Register-Storage (LB)
 void Assembler::adb(DoubleRegister r1, const MemOperand& opnd) {
   rxe_form(ADB,
@@ -3032,6 +3040,14 @@ void Assembler::cdbr(DoubleRegister r1, DoubleRegister r2) {
 }
 
 
+// Divide Register-Register (LB)
+void Assembler::debr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(DEBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
 // Divide Register-Storage (LB)
 void Assembler::ddb(DoubleRegister r1, const MemOperand& opnd) {
   rxe_form(DDB, Register::from_code(r1.code()),
@@ -3047,6 +3063,14 @@ void Assembler::ddbr(DoubleRegister r1, DoubleRegister r2) {
 }
 
 
+// Multiply Register-Register (LB)
+void Assembler::meebr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(MEEBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
 // Multiply Register-Storage (LB)
 void Assembler::mdb(DoubleRegister r1, const MemOperand& opnd) {
   rxe_form(MDB, Register::from_code(r1.code()),
@@ -3057,6 +3081,14 @@ void Assembler::mdb(DoubleRegister r1, const MemOperand& opnd) {
 // Multiply Register-Register (LB)
 void Assembler::mdbr(DoubleRegister r1, DoubleRegister r2) {
   rre_form(MDBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
+// Subtract Register-Register (LB)
+void Assembler::sebr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(SEBR,
            Register::from_code(r1.code()),
            Register::from_code(r2.code()));
 }
