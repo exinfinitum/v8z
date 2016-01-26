@@ -1179,8 +1179,11 @@ SS2_FORM(zap);
               Register fixReg, DoubleRegister fltReg);
 
   // float type conversion
+  void cegbr(DoubleRegister fltReg, Register fixReg);
   void cfebr(Register fixReg, DoubleRegister fltReg);
   void cefbr(DoubleRegister fltReg, Register fixReg);
+  void celgbr(Condition m3, Condition m4,
+              DoubleRegister fltReg, Register fixReg);
 
   void cdb(DoubleRegister r1, const MemOperand& opnd);
   void cdbr(DoubleRegister r1, DoubleRegister r2);

@@ -3238,10 +3238,23 @@ void Assembler::cdlfbr(Condition m3, Condition m4,
             Register::from_code(r1.code()), r2);
 }
 
+// Convert from Fixed point (S<-64)
+void Assembler::cegbr(DoubleRegister r1, Register r2) {
+  rre_form(CEGBR, Register::from_code(r1.code()), r2);
+}
+
 
 // Convert from Fixed point (S<-32)
 void Assembler::cefbr(DoubleRegister r1, Register r2) {
   rre_form(CEFBR, Register::from_code(r1.code()), r2);
+}
+
+
+// Convert from Fixed Logical (S<-64)
+void Assembler::celgbr(Condition m3, Condition m4,
+                       DoubleRegister r1, Register r2) {
+  rrfe_form(CELGBR, Condition(0), Condition(0),
+            Register::from_code(r1.code()), r2);
 }
 
 

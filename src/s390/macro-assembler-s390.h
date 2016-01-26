@@ -755,6 +755,9 @@ class MacroAssembler : public Assembler {
   void LoadDoubleLiteral(DoubleRegister result,
       uint64_t value, Register scratch);
 
+  void LoadFloat32Literal(DoubleRegister result, float value,
+      Register scratch);
+
   void StoreW(Register src, const MemOperand& mem,
                  Register scratch = no_reg);
 

@@ -669,8 +669,7 @@ void MacroAssembler::ConvertInt64ToDouble(Register src,
 
 void MacroAssembler::ConvertUnsignedInt64ToFloat(Register src,
                                                  DoubleRegister double_dst) {
-  UNIMPLEMENTED();
-  MovInt64ToDouble(double_dst, src);
+  celgbr(Condition(0), Condition(0), double_dst, src);
   // fcfidus(double_dst, double_dst);
 }
 
@@ -684,8 +683,7 @@ void MacroAssembler::ConvertUnsignedInt64ToDouble(Register src,
 
 void MacroAssembler::ConvertInt64ToFloat(Register src,
                                          DoubleRegister double_dst) {
-  UNIMPLEMENTED();
-  MovInt64ToDouble(double_dst, src);
+  cegbr(double_dst, src);
   // fcfids(double_dst, double_dst);
 }
 #endif
@@ -4185,12 +4183,10 @@ void MacroAssembler::SubP(Register dst, const MemOperand& opnd) {
 void MacroAssembler::MovIntToFloat(DoubleRegister dst, Register src) {
   sllg(src, src, Operand(32));
   ldgr(dst, src);
-  ldebr(dst, dst);
 }
 
 
 void MacroAssembler::MovFloatToInt(Register dst, DoubleRegister src) {
-  ledbr(src, src);
   lgdr(dst, src);
   srlg(dst, dst, Operand(32));
 }
@@ -4849,6 +4845,19 @@ void MacroAssembler::LoadDoubleLiteral(DoubleRegister result,
                                        Register scratch) {
   uint64_t int_val = bit_cast<uint64_t, double>(value);
   LoadDoubleLiteral(result, int_val, scratch);
+}
+
+
+void MacroAssembler::LoadFloat32Literal(DoubleRegister result,
+                                       float value,
+                                       Register scratch) {
+  uint32_t hi_32 = bit_cast<uint32_t>(value);
+  uint32_t lo_32 = 0;
+
+  // Load the 64-bit value into a GPR, then transfer it to FPR via LDGR
+  iihf(scratch, Operand(hi_32));
+  iilf(scratch, Operand(lo_32));
+  ldgr(result, scratch);
 }
 
 
