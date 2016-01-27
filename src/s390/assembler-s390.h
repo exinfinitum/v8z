@@ -1163,6 +1163,7 @@ SS2_FORM(zap);
 
   void ledbr(DoubleRegister r1, DoubleRegister r2);
   void ldebr(DoubleRegister r1, DoubleRegister r2);
+  void lpebr(DoubleRegister r1,  DoubleRegister r2);
   void lpdbr(DoubleRegister r1,  DoubleRegister r2);
   // double type conversion
   void cfdbr(Condition m, Register fixReg, DoubleRegister fltReg);
@@ -1185,6 +1186,7 @@ SS2_FORM(zap);
   void celgbr(Condition m3, Condition m4,
               DoubleRegister fltReg, Register fixReg);
 
+  void cebr(DoubleRegister r1, DoubleRegister r2);
   void cdb(DoubleRegister r1, const MemOperand& opnd);
   void cdbr(DoubleRegister r1, DoubleRegister r2);
   void aebr(DoubleRegister r1, DoubleRegister r2);
@@ -1203,6 +1205,7 @@ SS2_FORM(zap);
   void madbr(DoubleRegister r1, DoubleRegister r2, DoubleRegister r3);
   void msdbr(DoubleRegister r1, DoubleRegister r2, DoubleRegister r3);
 
+  void sqebr(DoubleRegister r1, DoubleRegister r2);
   void sqdb(DoubleRegister r1, const MemOperand& opnd);
   void sqdbr(DoubleRegister r1, DoubleRegister r2);
   void lcdbr(DoubleRegister r1, DoubleRegister r2);
@@ -1216,6 +1219,7 @@ SS2_FORM(zap);
     FIDBRA_ROUND_TOWARD_POS_INF = 6,
     FIDBRA_ROUND_TOWARD_NEG_INF = 7
   };
+  void fiebra(DoubleRegister d1, DoubleRegister d2, FIDBRA_MASK3 m3);
   void fidbra(DoubleRegister d1, DoubleRegister d2, FIDBRA_MASK3 m3);
 
   // Branch Instructions

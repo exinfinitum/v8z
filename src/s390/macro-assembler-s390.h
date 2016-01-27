@@ -1136,6 +1136,14 @@ class MacroAssembler : public Assembler {
                      Register input_high, Register scratch,
                      DoubleRegister double_scratch, Label* done, Label* exact);
 
+  // Perform ceiling of float in input_register and store in double_output.
+  void FloatCeiling32(DoubleRegister double_output, DoubleRegister double_input,
+                      Register scratch);
+
+  // Perform floor of float in input_register and store in double_output.
+  void FloatFloor32(DoubleRegister double_output, DoubleRegister double_input,
+                    Register scratch);
+
   // Perform ceiling of double in input_register and store in double_output.
   void FloatCeiling64(DoubleRegister double_output, DoubleRegister double_input,
                       Register scratch);

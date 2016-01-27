@@ -1166,7 +1166,7 @@ void InstructionSelector::VisitFloat64Min(Node* node) { UNREACHABLE(); }
 
 
 void InstructionSelector::VisitFloat32Abs(Node* node) {
-  VisitRR(this, kS390_AbsDouble, node);
+  VisitRR(this, kS390_AbsFloat, node);
 }
 
 
@@ -1176,7 +1176,7 @@ void InstructionSelector::VisitFloat64Abs(Node* node) {
 
 
 void InstructionSelector::VisitFloat32Sqrt(Node* node) {
-  VisitRR(this, kS390_SqrtDouble, node);
+  VisitRR(this, kS390_SqrtFloat, node);
 }
 
 
@@ -1186,7 +1186,7 @@ void InstructionSelector::VisitFloat64Sqrt(Node* node) {
 
 
 void InstructionSelector::VisitFloat32RoundDown(Node* node) {
-  VisitRR(this, kS390_FloorDouble, node);
+  VisitRR(this, kS390_FloorFloat, node);
 }
 
 
@@ -1196,7 +1196,7 @@ void InstructionSelector::VisitFloat64RoundDown(Node* node) {
 
 
 void InstructionSelector::VisitFloat32RoundUp(Node* node) {
-  VisitRR(this, kS390_CeilDouble, node);
+  VisitRR(this, kS390_CeilFloat, node);
 }
 
 
@@ -1206,7 +1206,7 @@ void InstructionSelector::VisitFloat64RoundUp(Node* node) {
 
 
 void InstructionSelector::VisitFloat32RoundTruncate(Node* node) {
-  VisitRR(this, kS390_TruncateDouble, node);
+  VisitRR(this, kS390_TruncateFloat, node);
 }
 
 

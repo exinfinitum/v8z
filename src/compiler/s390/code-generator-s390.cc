@@ -1043,6 +1043,27 @@ void CodeGenerator::AssembleArchInstruction(Instruction* instr) {
       ASSEMBLE_MODULO(dlr, srdl);
       break;
 #endif
+    case kS390_AbsFloat:
+      __ lpebr(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+      break;
+    case kS390_SqrtFloat:
+      ASSEMBLE_FLOAT_UNOP(sqebr);
+      break;
+    case kS390_FloorFloat:
+//      ASSEMBLE_FLOAT_UNOP_RC(frim);
+      __ FloatFloor32(i.OutputDoubleRegister(), i.InputDoubleRegister(0),
+                      kScratchReg);
+      break;
+    case kS390_CeilFloat:
+      __ FloatCeiling32(i.OutputDoubleRegister(),
+                        i.InputDoubleRegister(0),
+                        kScratchReg);
+      break;
+    case kS390_TruncateFloat:
+      __ fiebra(i.OutputDoubleRegister(), i.InputDoubleRegister(0),
+          v8::internal::Assembler::FIDBRA_ROUND_TOWARD_0);
+      break;
+//  Double operations
     case kS390_ModDouble:
       ASSEMBLE_FLOAT_MODULO();
       break;

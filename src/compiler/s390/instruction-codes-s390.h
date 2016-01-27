@@ -57,6 +57,11 @@ namespace compiler {
   V(S390_ModDouble)                 \
   V(S390_Neg)                       \
   V(S390_NegDouble)                 \
+  V(S390_SqrtFloat)                 \
+  V(S390_FloorFloat)                \
+  V(S390_CeilFloat)                 \
+  V(S390_TruncateFloat)             \
+  V(S390_AbsFloat)                  \
   V(S390_SqrtDouble)                \
   V(S390_FloorDouble)               \
   V(S390_CeilDouble)                \

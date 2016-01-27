@@ -3025,6 +3025,14 @@ void Assembler::adbr(DoubleRegister r1, DoubleRegister r2) {
 }
 
 
+// Compare Register-Register (LB)
+void Assembler::cebr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(CEBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
 // Compare Register-Storage (LB)
 void Assembler::cdb(DoubleRegister r1, const MemOperand& opnd) {
   rx_form(CD, Register::from_code(r1.code()),
@@ -3117,6 +3125,14 @@ void Assembler::sqdb(DoubleRegister r1, const MemOperand& opnd) {
 
 
 // Square Root Register-Register (LB)
+void Assembler::sqebr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(SQEBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
+// Square Root Register-Register (LB)
 void Assembler::sqdbr(DoubleRegister r1, DoubleRegister r2) {
   rre_form(SQDBR,
            Register::from_code(r1.code()),
@@ -3143,6 +3159,14 @@ void Assembler::ldebr(DoubleRegister r1, DoubleRegister r2) {
 // Load Complement Register-Register (LB)
 void Assembler::lcdbr(DoubleRegister r1, DoubleRegister r2) {
   rre_form(LCDBR,
+           Register::from_code(r1.code()),
+           Register::from_code(r2.code()));
+}
+
+
+// Load Positive Register-Register (LB)
+void Assembler::lpebr(DoubleRegister r1, DoubleRegister r2) {
+  rre_form(LPEBR,
            Register::from_code(r1.code()),
            Register::from_code(r2.code()));
 }
@@ -3300,6 +3324,15 @@ void Assembler::cfebr(Register r1, DoubleRegister r2) {
 void Assembler::ldeb(DoubleRegister d1, const MemOperand& opnd) {
   rxe_form(LDEB, Register::from_code(d1.code()), opnd.rx(), opnd.rb(),
            opnd.offset());
+}
+
+
+// Load FP Integer
+void Assembler::fiebra(DoubleRegister d1, DoubleRegister d2, FIDBRA_MASK3 m3) {
+  rrf2_form(FIEBRA << 16 |
+      m3 * B12 |
+      d1.code() * B4 |
+      d2.code());
 }
 
 
