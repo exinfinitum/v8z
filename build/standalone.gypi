@@ -119,7 +119,7 @@
         }],
         ['host_arch!="ppc" and host_arch!="ppc64" and host_arch!="ppc64le" and host_arch!="s390" and host_arch!="s390x" and \
           coverage==0', {
-          'host_clang%': 1,
+          'host_clang%': 0,
         }, {
           'host_clang%': 0,
         }],
@@ -229,12 +229,12 @@
       }],
       ['(OS=="linux" or OS=="mac") and (target_arch=="ia32" or target_arch=="x64") and \
         (v8_target_arch!="x87" and v8_target_arch!="x32") and coverage==0', {
-        'clang%': 1,
+        'clang%': 0,
       }, {
         'clang%': 0,
       }],
       ['asan==1 or lsan==1 or msan==1 or tsan==1', {
-        'clang%': 1,
+        'clang%': 0,
         'use_allocator%': 'none',
       }],
       ['asan==1 and OS=="linux"', {
