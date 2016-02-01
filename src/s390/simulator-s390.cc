@@ -3217,9 +3217,9 @@ bool Simulator::DecodeFourByteFloatingPoint(Instruction* instr) {
             case ROUND_TO_NEAREST_WITH_TIES_TO_EVEN: {
               double ceil_val = std::ceil(r2_val);
               double floor_val = std::floor(r2_val);
-              if (abs(r2_val - floor_val) > abs(r2_val - ceil_val)) {
+              if (std::abs(r2_val - floor_val) > std::abs(r2_val - ceil_val)) {
                 r1_val = static_cast<int64_t>(ceil_val);
-              } else if (abs(r2_val - floor_val) < abs(r2_val - ceil_val)) {
+              } else if (std::abs(r2_val - floor_val) < std::abs(r2_val - ceil_val)) {
                 r1_val = static_cast<int64_t>(floor_val);
               } else {  // check which one is even:
                 int64_t c_v = static_cast<int64_t>(ceil_val);
