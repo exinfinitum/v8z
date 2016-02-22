@@ -2390,8 +2390,7 @@ void MacroAssembler::FloatCeiling32(DoubleRegister double_output,
   Register scratch2 = r0;
 
   // Move high word into scratch
-  StoreDouble(double_input, MemOperand(sp, -kDoubleSize));
-  LoadlW(scratch, MemOperand(sp, -kDoubleSize + Register::kExponentOffset));
+  MovFloatToInt(scratch, double_input);
 
   // Test for NaN/Inf which results in NaN/Inf respectively
   static const uint32_t float32ExponentMask = 0x7f800000u;
@@ -2435,8 +2434,7 @@ void MacroAssembler::FloatFloor32(DoubleRegister double_output,
   Register scratch2 = r0;
 
   // Move high word into scratch
-  StoreDouble(double_input, MemOperand(sp, -kDoubleSize));
-  LoadlW(scratch, MemOperand(sp, -kDoubleSize + Register::kExponentOffset));
+  MovFloatToInt(scratch, double_input);
 
   // Test for NaN/Inf which results in NaN/Inf respectively
   static const uint32_t float32ExponentMask = 0x7f800000u;
