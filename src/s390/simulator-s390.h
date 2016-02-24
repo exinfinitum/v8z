@@ -172,7 +172,6 @@ class Simulator {
     int32_t f_int = *bit_cast<int32_t*>(&f);
     int64_t finalval = static_cast<int64_t>(f_int) << 32;
     set_d_register(dreg, finalval);
-
   }
 
   float get_float32_from_d_register(int dreg) {
