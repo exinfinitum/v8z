@@ -259,7 +259,7 @@ class Simulator {
   bool CarryFrom(int32_t left, int32_t right, int32_t carry = 0);
   bool BorrowFrom(int32_t left, int32_t right);
   template <typename T1>
-  bool OverflowFrom(T1 alu_out, T1 left, T1 right,
+  inline bool OverflowFrom(T1 alu_out, T1 left, T1 right,
                     bool addition);
 
   // Helper functions to decode common "addressing" modes

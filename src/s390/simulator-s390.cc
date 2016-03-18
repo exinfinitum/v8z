@@ -1642,10 +1642,15 @@ void Simulator::PrintStopInfo(uint32_t code) {
 //      (a) No overflow if they don't have opposite sign
 //      (b) Overflow if opposite
 #define CheckOverflowForIntAdd(src1, src2) \
-  OverflowFrom(src1 + src2, src1, src2, true);
+    ((src1 >= 0 && src2 >= 0) || (src1 < 0 && src2 < 0)) \
+    && ((src1 < 0 && (src1 + src2) >= 0) || (src1 >= 0 && (src1 + src2) < 0));
+  //OverflowFrom(src1 + src2, src1, src2, true);
 
 #define CheckOverflowForIntSub(src1, src2) \
-  OverflowFrom(src1 - src2, src1, src2, false);
+    ((src1 < 0 && src2 >= 0) || (src1 >= 0 && src2 < 0)) \
+    && ((src1 < 0 && (src1 + src2) >= 0) || (src1 >= 0 && (src1 + src2) < 0));
+
+  //OverflowFrom(src1 - src2, src1, src2, false);
 
 // Method for checking overflow on unsigned addtion
 #define CheckOverflowForUIntAdd(src1, src2) \
