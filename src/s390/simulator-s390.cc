@@ -2842,7 +2842,7 @@ bool Simulator::DecodeFourByteArithmetic(Instruction* instr) {
       int64_t x2_val = (x2 == 0) ? 0 : get_register(x2);
       intptr_t d2_val = rxinst->D2Value();
       intptr_t addr = b2_val + x2_val + d2_val;
-      int32_t mem_val = static_cast<int32_t>(ReadH(addr, instr));
+      int16_t mem_val = (ReadH(addr, instr));
       int32_t alu_out = 0;
       bool isOF = false;
       if (AH == op) {
@@ -4413,8 +4413,7 @@ bool Simulator::DecodeSixByteArithmetic(Instruction* instr) {
       int64_t b2_val = (b2 == 0) ? 0 : get_register(b2);
       int64_t x2_val = (x2 == 0) ? 0 : get_register(x2);
       intptr_t d2_val = rxyInstr->D2Value();
-      int32_t mem_val = static_cast<int32_t>(ReadH(b2_val +
-                                                   d2_val + x2_val, instr));
+      int16_t mem_val = (ReadH(b2_val + d2_val + x2_val, instr));
       int32_t alu_out = 0;
       bool isOF = false;
       switch (op) {
@@ -4527,12 +4526,12 @@ bool Simulator::DecodeSixByteArithmetic(Instruction* instr) {
     case AFI: {
       // Clobbering Add Word Immediate
       RILInstruction* rilInstr = reinterpret_cast<RILInstruction*>(instr);
+      int32_t i2 = rilInstr->I2Value();
       int32_t r1 = rilInstr->R1Value();
       bool isOF = false;
       if (AFI == op) {
         // 32-bit Add (Register + 32-bit Immediate)
         int32_t r1_val = get_low_register<int32_t>(r1);
-        int32_t i2 = rilInstr->I2Value();
         isOF = CheckOverflowForIntAdd(r1_val, i2);
         int32_t alu_out = r1_val + i2;
         set_low_register(r1, alu_out);
@@ -4540,7 +4539,6 @@ bool Simulator::DecodeSixByteArithmetic(Instruction* instr) {
       } else if (AGFI == op) {
         // 64-bit Add (Register + 32-bit Imm)
         int64_t r1_val = get_register(r1);
-        int64_t i2 = static_cast<int64_t>(rilInstr->I2Value());
         isOF = CheckOverflowForIntAdd(r1_val, i2);
         int64_t alu_out = r1_val + i2;
         set_register(r1, alu_out);
@@ -4550,7 +4548,7 @@ bool Simulator::DecodeSixByteArithmetic(Instruction* instr) {
       break;
     }
     case ASI: {
-      int32_t i2 = static_cast<int32_t>(siyInstr->I2Value());
+      int8_t i2 = static_cast<int8_t>(siyInstr->I2Value());
       int b1 = siyInstr->B1Value();
       intptr_t b1_val = (b1 == 0) ? 0 : get_register(b1);
 
@@ -4566,7 +4564,7 @@ bool Simulator::DecodeSixByteArithmetic(Instruction* instr) {
       break;
     }
     case AGSI: {
-      int64_t i2 = static_cast<int64_t>(siyInstr->I2Value());
+      int8_t i2 = static_cast<int8_t>(siyInstr->I2Value());
       int b1 = siyInstr->B1Value();
       intptr_t b1_val = (b1 == 0) ? 0 : get_register(b1);
 
